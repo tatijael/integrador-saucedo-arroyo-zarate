@@ -1,0 +1,20 @@
+[
+  {
+    "id": "p1",
+    "name": "Editorial Sudamericana",
+    "country": "Argentina",
+    "foundedYear": 1939
+  },
+  {
+    "id": "p2",
+    "name": "HarperCollins",
+    "country": "United States",
+    "foundedYear": 1817
+  },
+  {
+    "id": "p3",
+    "name": "Plaza & Janés",
+    "country": "Spain",
+    "foundedYear": 1959
+  }
+]
