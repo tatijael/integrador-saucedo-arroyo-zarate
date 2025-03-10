@@ -1,23 +1,18 @@
-const bookModel = require('../models/booksModels')
-const bookView = require("../views/booksView")
+const publisherModel = require('../models/publisherModels')
+const responseView = require("../views/responseView")
 
 const publisherController = {
-  getBooks: () => {
-    const publisher = bookModel.readPublisher();
+    getAllPublishers: () => {
+        const publishers = publisherModel.readPublisher();
+        return responseView.formatPublishers(publishers);
+    },
 
-    return bookView.displayBooks(publisher)
-  },
-
-  addBooks: (newPublisher) => {
-    const publisher = bookModel.readPublisher();
-
-    publisher.push(newPublisher)
-
-    bookModel.writeBook(publisher)
-
-    return "Se añadio la editorial correctamente"
-  }
+    addPublisher: (newPublisher) => {
+        const publishers = publisherModel.readPublisher();
+        publishers.push(newPublisher);
+        publisherModel.writePublisher(publishers);
+        return responseView.formatNewItem(newPublisher, 'Editorial');
+    }
 }
-
 
 module.exports = publisherController

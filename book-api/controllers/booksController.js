@@ -1,23 +1,18 @@
 const bookModel = require('../models/booksModels')
-const bookView = require("../views/booksView")
+const responseView = require("../views/responseView")
 
 const bookController = {
-  getBooks: () => {
-    const books = bookModel.readBook();
+    getAllBooks: () => {
+        const books = bookModel.readBook();
+        return responseView.formatBooks(books);
+    },
 
-    return bookView.displayBooks(books)
-  },
-
-  addBooks: (newBook) => {
-    const books = bookModel.readBook();
-
-    books.push(newBook)
-
-    bookModel.writeBook(books)
-
-    return "Se añadio el libro correctamente"
-  }
+    addBook: (newBook) => {
+        const books = bookModel.readBook();
+        books.push(newBook);
+        bookModel.writeBook(books);
+        return responseView.formatNewItem(newBook, 'Libro');
+    }
 }
-
 
 module.exports = bookController
