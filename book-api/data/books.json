@@ -1,18 +1,50 @@
-
 [
   {
-    "id": "b1",
-    "title": "Cien años de soledad",
-    "year": 1967
+    "id": "p1",
+    "name": "Editorial Sudamericana",
+    "country": "Argentina",
+    "foundedYear": 1939
   },
   {
-    "id": "b2",
-    "title": "El Alquimista",
-    "year": 1988
+    "id": "p2",
+    "name": "HarperCollins",
+    "country": "United States",
+    "foundedYear": 1817
   },
   {
-    "id": "b3",
-    "title": "La Casa de los Espíritus",
-    "year": 1982
+    "id": "p3",
+    "name": "Plaza & Janés",
+    "country": "Spain",
+    "foundedYear": 1959
+  },
+  {
+    "name": "gggg",
+    "country": "ggg",
+    "foundedYear": "ggg",
+    "id": "37398af2-1571-4405-a04c-5d48a36d6f8c"
+  },
+  {
+    "id": "4d9981fc-d7a2-4d46-ae38-e7cd0d97c463",
+    "name": "hhhh",
+    "country": "hhhh",
+    "foundedYear": "hhhh"
+  },
+  {
+    "id": "d77426ce-c2f6-47dd-96b7-a5654b6d12c1",
+    "name": "tamara",
+    "country": "zarate",
+    "foundedYear": "1987"
+  },
+  {
+    "id": "972536e6-96e1-4068-8821-67ad64f976b8",
+    "name": "sssssssssss",
+    "country": "ddddddddddddd",
+    "foundedYear": "ddddddddddddd"
+  },
+  {
+    "id": "37a04ac8-cfab-4a28-bf02-7e9edea1c55f",
+    "name": "aaaa",
+    "country": "aaaa",
+    "foundedYear": "aaaa"
   }
 ]

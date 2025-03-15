@@ -1,45 +1,40 @@
-const fs = require('fs')
+const fs = require("fs");
+const path = require("path");
 
-const path = require('path')
+const autor = path.join(__dirname, "../data/authors.json");
+const books = path.join(__dirname, "../data/books.json");
+const publisher = path.join(__dirname, "../data/publishers.json");
 
-const file = path.join(__dirname, '../data/authors.json')
-const file2 = path.join(__dirname, '../data/books.json')
-const file3 = path.join(__dirname, '../data/publishers.json')
+const read = (file) => {
+  if (file === "autor") {
+    const data = fs.readFileSync(autor, "utf-8");
+    return JSON.parse(data);
+  } else if (file === "book") {
+    const data = fs.readFileSync(books, "utf-8");
+    return JSON.parse(data);
+  } else if (file === "publisher") {
+    const data = fs.readFileSync(publisher, "utf-8");
+    return JSON.parse(data);
+  }
+};
 
-const readAuthor = () => {
-  const data = fs.readFileSync(file, 'utf-8')
-  return JSON.parse(data)
-}
 
-const readBook = () => {
-  const data = fs.readFileSync(file2, 'utf-8')
-  return JSON.parse(data)
-}
 
-const readPublisher = () => {
-  const data = fs.readFileSync(file3, 'utf-8')
-  return JSON.parse(data)
-}
+const write = (data, path) => {
+  if (path === "autor") {
+    const dataJson = JSON.stringify(data, null, 2);
+    fs.writeFileSync(autor, dataJson, "utf-8");
+  } else if (path === "book") {
+    const dataJson = JSON.stringify(data, null, 2);
+    fs.writeFileSync(books, dataJson, "utf-8");
+  } else if (path === "publisher") {
+    const dataJson = JSON.stringify(data, null, 2);
+    fs.writeFileSync(publisher, dataJson, "utf-8");
+  }
+};
 
-const writeAuthor = (data) => {
-  const dataJson = JSON.stringify(data, null, 2);
-  fs.writeFileSync(file, dataJson);
-}
 
-const writeBook = (data) => {
-  const dataJson = JSON.stringify(data, null, 2);
-  fs.writeFileSync(file2, dataJson);
-}
-
-const writePublisher = (data) => {
-  const dataJson = JSON.stringify(data, null, 2);
-  fs.writeFileSync(file3, dataJson);
-}
-
-module.exports = { readAuthor,
-  readBook,
-  readPublisher,
-  writeAuthor,
-  writeBook,
-  writePublisher
-}
+module.exports = {
+  read,
+  write,
+};

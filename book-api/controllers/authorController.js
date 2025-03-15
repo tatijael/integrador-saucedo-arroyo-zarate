@@ -1,23 +1,43 @@
-const bookModel = require('../models/booksModels')
-const bookView = require("../views/booksView")
+const bookModel = require("../models/booksModels");
+const bookView = require("../views/booksView");
 
 const authorController = {
-  getBooks: () => {
-    const author = bookModel.readAuthor();
-
-    return bookView.displayAuthor(author)
+  getAuthor: () => {
+    const author = bookModel.read("autor");
+    return bookView.displayAuthor(author , "autor");
   },
 
-  addBooks: (newAuthor) => {
-    const author = bookModel.readAuthor();
+  addAuthors: (newAuthor) => {
+    const author = bookModel.read("autor");
+    author.push(newAuthor);
+    bookModel.write(author , "autor");
 
-    author.push(newAuthor)
+    return `Se añadio el Author correctamente ${newAuthor.name}`;
+  },
 
-    bookModel.writeAuthor(author)
+  delteAuthor: (id) => {
+    const author = bookModel.read("autor");
+    const delteAuthor = author.find((author) => author.id === id);
+    if (!delteAuthor) {
+      return `No se encontro el Author con el id: ${id}`;
+    } else {
+      const newAuthor = author.filter((author) => author.id !== id);
+      bookModel.write(newAuthor, "autor");
+    }
+   ;
+    return `Author eliminado: ${id}`;
+  },
+    searchAutor: (title) => {
+      const autores = bookModel.read("autor");
+      const search = autores.find((autor) => autor.name === title);
+      if (!search) {
+        return `No se encontro el nombre del Autor: ${title}`;
+      } else {
+        return `ID: ${search.id} | Nombre: ${search.name} | Cumpleños: ${search.birthYear} | Ciudad: ${search.nationality}`
+      }
+    },
 
-    return "Se añadio el Author correctamente"
-  }
-}
+  
+};
 
-
-module.exports = authorController
+module.exports = authorController;
