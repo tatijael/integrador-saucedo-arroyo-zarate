@@ -54,6 +54,13 @@ const formatResponse = {
           status: 'error',
           message: message
       });
+  },
+
+  formatEditBook: (book) => {
+    return JSON.stringify( {
+        status: 'edited',
+        message: "Libro editado correctamente"
+    })
   }
 };
 

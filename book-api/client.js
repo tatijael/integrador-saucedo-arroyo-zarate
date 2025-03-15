@@ -1,6 +1,7 @@
 
 const net = require('net')
 const readline = require("readline");
+const { editBook } = require('./controllers/booksController');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -17,7 +18,8 @@ function showMenu() {
     console.log('4. ADD AUTHOR');
     console.log('5. GET PUBLISHER');
     console.log('6. ADD PUBLISHER');
-    console.log('7. Exit');
+    console.log('7. EDIT BOOK');
+    console.log('8. Exit');
     
     rl.question('Selecciona una opción: ', handleOption);
 }
@@ -43,6 +45,9 @@ function handleOption(option) {
             addPublisher();
             break;
         case '7':
+            editBooks();
+            break;
+        case '8':
             console.log('Adios!');
             client.destroy();
             rl.close();
@@ -88,6 +93,24 @@ function addPublisher() {
         });
     });
 }
+
+function editBooks() {
+    const newBook = {};
+    rl.question('ID: ', (id) => {
+        rl.question('Title: ', (title) => {
+            newBook.title = title;
+            rl.question('Author: ', (author) => {
+                newBook.author = author;
+                rl.question('Publisher: ', (publisher) => {
+                    newBook.publisher = publisher;
+                    client.write(`EDIT BOOK ${JSON.stringify(id, newBook)}`)
+                    console.log("newBook", newBook);
+                    });
+                });
+            });
+        });
+};
+  
 
 client.on('connect', () => {
     console.log("Conectado al servidor");

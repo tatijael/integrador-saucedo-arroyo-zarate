@@ -15,7 +15,6 @@ const server = net.createServer((socket) => {
 
     socket.on('data', (data) => {
         const command = data.toString().trim();
-
         if (command === 'GET BOOKS') {
             const books = bookController.getAllBooks();
             socket.write(JSON.stringify(books));
@@ -48,6 +47,16 @@ const server = net.createServer((socket) => {
                 publisherObject.id = uuidv4();
                 const newPublisher = pusblisherController.addPublisher(publisherObject);
                 socket.write(JSON.stringify({ message: 'Editorial agregada correctamente', publisher: newPublisher }));
+            }
+        } else if (command.startsWith('EDIT BOOK')) {
+            const newBookData = command.replace('EDIT BOOK ', '');
+            console.log("newBookData", newBookData);
+            if (isJSON(newBookData)) {
+                const parseData = JSON.parse(newBookData);
+                 const { id, newDate } = parseData;
+                console.log("parseData", parseData);
+                const newBook = bookController.editBook(id, newDate);
+                socket.write(JSON.stringify({ message: 'Libro editado correctamente', book: newBook }));
             }
         }
     });
