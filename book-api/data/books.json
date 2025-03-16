@@ -49,5 +49,17 @@
     "author": "author new",
     "publisher": "isi",
     "id": "ca404a17-9055-47f9-8c1d-769b575a1bdc"
+  },
+  {
+    "title": "82830",
+    "author": "23",
+    "publisher": "new publisher",
+    "id": "cc906e1f-e6aa-4edf-bfa5-6aef5ab5d3fb"
+  },
+  {
+    "title": "Rayu",
+    "author": "Cortazar",
+    "publisher": "Rayu",
+    "id": "e10ddaaf-b708-441c-acfb-20f8311cfc22"
   }
 ]
