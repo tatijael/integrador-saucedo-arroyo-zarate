@@ -1,65 +1,8 @@
 [
   {
-    "id": "b1",
-    "title": "Cien años de soledad",
-    "year": 1967
-  },
-  {
-    "id": "b2",
-    "title": "El Alquimista",
-    "year": 1988
-  },
-  {
-    "id": "b3",
-    "title": "La Casa de los Espíritus",
-    "year": 1982
-  },
-  {
-    "title": "Jael ",
-    "author": "asd",
-    "publisher": "1898",
-    "id": "c23fc2db-3b72-4be2-8d7f-e3747c00fc7f"
-  },
-  {
-    "title": "23423222",
-    "author": "23423423",
-    "publisher": "111",
-    "id": "fa9ee212-7962-429b-b5d5-d58aa171f5c6"
-  },
-  {
-    "title": "hghgs",
-    "author": "qwqwqw",
-    "publisher": "qwqwqw",
-    "id": "bb553547-e759-42f0-b29b-85c6f2a6c7c9"
-  },
-  {
-    "title": "23424",
-    "author": "234234",
-    "publisher": "23421432",
-    "id": "3c65e134-b152-40ca-8d6b-c5ddd7c844f6"
-  },
-  {
-    "title": "98234",
-    "author": "2134dfcd",
-    "publisher": "2321edw",
-    "id": "7691a8cd-f8f2-4548-9054-13181285d327"
-  },
-  {
-    "title": "nuew book",
-    "author": "author new",
-    "publisher": "isi",
-    "id": "ca404a17-9055-47f9-8c1d-769b575a1bdc"
-  },
-  {
-    "title": "82830",
-    "author": "23",
-    "publisher": "new publisher",
-    "id": "cc906e1f-e6aa-4edf-bfa5-6aef5ab5d3fb"
-  },
-  {
-    "title": "Rayu",
-    "author": "Cortazar",
-    "publisher": "Rayu",
-    "id": "e10ddaaf-b708-441c-acfb-20f8311cfc22"
+    "id": "7196cee0-127c-43d4-91dd-129440c6db3f",
+    "title": "NEW BOOK EXAMPLE",
+    "author": "EXAMPLE 2",
+    "publisher": "PUBLISHER"
   }
 ]

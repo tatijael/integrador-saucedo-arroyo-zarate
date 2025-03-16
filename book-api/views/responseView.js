@@ -61,8 +61,16 @@ const formatResponse = {
         status: 'success',
         message: `${type} actualizado correctamente`,
         data: item
-    });
-},
+        });
+    },
+
+  formatDeleteResponse: (item, type) => {
+    return JSON.stringify({
+        status:'success',
+        message: `${type} eliminado correctamente`,
+        data: item
+        });
+    }
 };
 
 module.exports = formatResponse;
