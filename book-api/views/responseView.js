@@ -56,12 +56,13 @@ const formatResponse = {
       });
   },
 
-  formatEditBook: (book) => {
-    return JSON.stringify( {
-        status: 'edited',
-        message: "Libro editado correctamente"
-    })
-  }
+  formatEditResponse: (item, type) => {
+    return JSON.stringify({
+        status: 'success',
+        message: `${type} actualizado correctamente`,
+        data: item
+    });
+},
 };
 
 module.exports = formatResponse;

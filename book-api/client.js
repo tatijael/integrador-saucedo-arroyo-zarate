@@ -14,14 +14,14 @@ function showMenu() {
     console.log('\n--- Book API Menu ---');
     console.log('1. GET BOOKS');
     console.log('2. ADD BOOK');
-    console.log('3. GET AUTHOR');
+    console.log('3. GET AUTHORS');
     console.log('4. ADD AUTHOR');
-    console.log('5. GET PUBLISHER');
+    console.log('5. GET PUBLISHERS');
     console.log('6. ADD PUBLISHER');
     console.log('7. EDIT BOOK');
     console.log('8. Exit');
     
-    rl.question('Selecciona una opción: ', handleOption);
+    rl.question('Selecciona una opción (Ingresar solo el número): ', handleOption);
 }
 
 function handleOption(option) {
@@ -33,13 +33,13 @@ function handleOption(option) {
             addBook();
             break;
         case '3':
-            client.write('GET AUTHOR');
+            client.write('GET AUTHORS');
             break;
         case '4':
             addAuthor();
             break;
         case '5':
-            client.write('GET PUBLISHER');
+            client.write('GET PUBLISHERS');
             break;
         case '6':
             addPublisher();
@@ -60,7 +60,7 @@ function handleOption(option) {
 
 function addBook() {
     const book = {};
-    rl.question('Title: ', (title) => {
+    rl.question('Title Book: ', (title) => {
         book.title = title;
         rl.question('Author: ', (author) => {
             book.author = author;
@@ -74,7 +74,7 @@ function addBook() {
 
 function addAuthor() {
     const author = {};
-    rl.question('Name: ', (name) => {
+    rl.question('Name author: ', (name) => {
         author.name = name;
         rl.question('Country: ', (country) => {
             author.country = country;
@@ -85,7 +85,7 @@ function addAuthor() {
 
 function addPublisher() {
     const publisher = {};
-    rl.question('Name: ', (name) => {
+    rl.question('Name publisher: ', (name) => {
         publisher.name = name;
         rl.question('Location: ', (location) => {
             publisher.location = location;
@@ -95,21 +95,21 @@ function addPublisher() {
 }
 
 function editBooks() {
-    const newBook = {};
-    rl.question('ID: ', (id) => {
-        rl.question('Title: ', (title) => {
-            newBook.title = title;
-            rl.question('Author: ', (author) => {
-                newBook.author = author;
-                rl.question('Publisher: ', (publisher) => {
-                    newBook.publisher = publisher;
-                    client.write(`EDIT BOOK ${JSON.stringify(id, newBook)}`)
-                    console.log("newBook", newBook);
-                    });
+    const book = {};
+    rl.question('ID del libro a editar: ', (id) => {
+        book.id = id;
+        rl.question('New Title: ', (title) => {
+            if (title) book.title = title;
+            rl.question('New Author: ', (author) => {
+                if (author) book.author = author;
+                rl.question('New publisher: ', (publisher) => {
+                    if (publisher) book.publisher = publisher;
+                    client.write(`EDIT BOOK ${JSON.stringify(book)}`);
                 });
             });
         });
-};
+    });
+}
   
 
 client.on('connect', () => {
@@ -118,8 +118,27 @@ client.on('connect', () => {
 });
 
 client.on('data', (data) => {
-    console.log("\nServidor responde:");
-    console.log(data.toString());
+    console.log("\n=== RESPUESTA SERVIDOR ===");
+    const response = JSON.parse(data.toString());
+    
+    if (response.status === 'success') {
+        if (response.data) {
+            if (Array.isArray(response.data)) {
+                console.log('\nListado:');
+                console.log(JSON.stringify(response.data, null, 2));
+            }
+        } else if (response.message) {
+            console.log('Mensaje:', response.message);
+        }
+    }
+    
+    if (response.message && (response.book || response.author || response.publisher)) {
+        console.log('Mensaje:', response.message);
+        const itemData = response.book || response.author || response.publisher;
+        console.log(JSON.stringify(JSON.parse(itemData), null, 2));
+    }
+    
+    console.log('\n============================');
     showMenu();
 });
 

@@ -17,13 +17,13 @@ const server = net.createServer((socket) => {
         const command = data.toString().trim();
         if (command === 'GET BOOKS') {
             const books = bookController.getAllBooks();
-            socket.write(JSON.stringify(books));
+            socket.write(books);
         } else if (command === 'GET AUTHORS') {
             const authors = authorController.getAllAuthors();
-            socket.write(JSON.stringify(authors));
+            socket.write(authors);
         } else if (command === 'GET PUBLISHERS') {
             const publishers = pusblisherController.getAllPublishers();
-            socket.write(JSON.stringify(publishers));
+            socket.write(publishers);
         } else if (command.startsWith('ADD BOOK')) {
             const bookData = command.replace('ADD BOOK ', '');
             if (isJSON(bookData)) {
@@ -49,15 +49,12 @@ const server = net.createServer((socket) => {
                 socket.write(JSON.stringify({ message: 'Editorial agregada correctamente', publisher: newPublisher }));
             }
         } else if (command.startsWith('EDIT BOOK')) {
-            const newBookData = command.replace('EDIT BOOK ', '');
-            console.log("newBookData", newBookData);
-            if (isJSON(newBookData)) {
-                const parseData = JSON.parse(newBookData);
-                 const { id, newDate } = parseData;
-                console.log("parseData", parseData);
-                const newBook = bookController.editBook(id, newDate);
-                socket.write(JSON.stringify({ message: 'Libro editado correctamente', book: newBook }));
-            }
+            const bookData = command.replace('EDIT BOOK ', '');
+            if (isJSON(bookData)) {
+                const bookObject = JSON.parse(bookData);
+                const updatedBook = bookController.editBook(bookObject);
+                socket.write(JSON.stringify({  message: 'Libro actualizado correctamente',  book: updatedBook }));
+            } 
         }
     });
 

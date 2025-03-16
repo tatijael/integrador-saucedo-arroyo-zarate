@@ -10,7 +10,7 @@ const authorController = {
     addAuthor: (newAuthor) => {
         const authors = authorModel.readAuthor();
         authors.push(newAuthor);
-        authorModel.writeAuthor(authors);x``
+        authorModel.writeAuthor(authors);
         return responseView.formatNewItem(newAuthor, 'Autor');
     }
 }

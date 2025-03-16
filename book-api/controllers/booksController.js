@@ -14,19 +14,21 @@ const bookController = {
         return responseView.formatNewItem(newBook, 'Libro');
     },
 
-    editBook: (id, newDate) => {
+    editBook: (bookData) => {
         const books = bookModel.readBook();
-        const search = books.find((book) => book.id === id);
-    
-        if (!search) {
-          return "No se encontro el libro con el id";
-        } else {
-          search.title = newDate.title;
-          search.author = newDate.author;
-          search.publisher = newDate.publisher;
-          bookModel.writeBook(books);
-          return responseView.formatEditBook(search);
+        const bookIndex = books.findIndex(book => book.id === bookData.id);
+        
+        if (bookIndex === -1) {
+            return responseView.formatError('Libro no encontrado');
         }
+
+        books[bookIndex] = {
+            ...books[bookIndex],
+            ...bookData
+        };
+
+        bookModel.writeBook(books);
+        return responseView.formatEditResponse(books[bookIndex], 'Libro');
     }
 }
 
