@@ -1,8 +1,32 @@
 [
   {
     "id": "7196cee0-127c-43d4-91dd-129440c6db3f",
-    "title": "NEW BOOK EXAMPLE",
-    "author": "EXAMPLE 2",
-    "publisher": "PUBLISHER"
+    "title": "One Hundred Years of Solitude",
+    "author": "Gabriel García Márquez",
+    "publisher": "Harper & Row"
+  },
+  {
+    "id": "9876abc5-432f-89d1-67e4-012345678901",
+    "title": "The Lord of the Rings",
+    "author": "J.R.R. Tolkien",
+    "publisher": "Allen & Unwin"
+  },
+  {
+    "id": "45678def-91a2-34bc-56de-789012345678",
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "publisher": "T. Egerton, Whitehall"
+  },
+  {
+    "id": "12345ghi-78j9-0klm-1234-567890123456",
+    "title": "1984",
+    "author": "George Orwell",
+    "publisher": "Secker and Warburg"
+  },
+  {
+    "id": "abcde123-45f6-7890-ghij-klmnopqrstuv",
+    "title": "Don Quixote",
+    "author": "Miguel de Cervantes",
+    "publisher": "Francisco de Robles"
   }
 ]

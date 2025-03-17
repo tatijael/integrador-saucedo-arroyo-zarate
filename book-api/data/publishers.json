@@ -1,32 +1,20 @@
 [
   {
-    "id": "p2",
-    "name": "HarperCollins",
-    "country": "United States",
-    "foundedYear": 1817
-  },
-  {
-    "id": "p3",
-    "name": "Plaza & Janés",
-    "country": "Spain",
-    "foundedYear": 1959
-  },
-  {
     "id": "55e807fd-ab70-4320-b147-6827dbef405b",
-    "name": "HarperCollins2",
-    "country": "Brasil",
-    "foundedYear": "1888"
+    "name": "Macmillan Publishers",
+    "country": "United Kingdom",
+    "foundedYear": 1843
   },
   {
     "id": "2cbd8d4c-ec1f-4b40-8fd2-1e30fdc7978a",
-    "name": "EXAMPLE",
-    "country": "BRASIL",
-    "foundedYear": "1777"
+    "name": "Hachette Livre",
+    "country": "France",
+    "foundedYear": 1826
   },
   {
     "id": "097a8d9f-bc0f-42d5-9125-058a7ce19c64",
-    "name": "EXAMPLE 4",
-    "country": "PARAGUAY",
-    "foundedYear": "1989"
+    "name": "Oxford University Press",
+    "country": "United Kingdom",
+    "foundedYear": 1586
   }
 ]

@@ -1,7 +1,27 @@
 [
   {
     "id": "1537859c-6873-4666-a4d8-04616bf602a7",
-    "name": "NEW AUTHOR NEW",
-    "country": "ARGENTINA"
+    "name": "Jorge Luis Borges",
+    "country": "Argentina"
+  },
+  {
+    "id": "2a4b9c8d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+    "name": "Isabel Allende",
+    "country": "Chile"
+  },
+  {
+    "id": "3b5c7d9e-4f6g-8h0i-2j4k-5l6m7n8o9p0q",
+    "name": "Gabriel García Márquez",
+    "country": "Colombia"
+  },
+  {
+    "id": "4c6d8e0f-5g7h-9i1j-3k5l-6m7n8o9p0q1r",
+    "name": "Julio Cortázar",
+    "country": "Argentina"
+  },
+  {
+    "id": "5d7e9f1g-6h8i-0j2k-4l6m-7n8o9p0q1r2s",
+    "name": "Mario Vargas Llosa",
+    "country": "Peru"
   }
 ]
