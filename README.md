@@ -3,6 +3,17 @@
 Este proyecto es una API para gestionar una biblioteca utilizando un servidor TCP implementado en Node.js. 
 Permite manejar libros, autores y editoriales, almacenando los datos en archivos JSON locales.
 
+## 📋 Requisitos Previos
+
+-e Node.js (versión 14 o superior)
+- npm (gestor de paquetes d Node.js)
+
+## 🔧 Instalación y Uso
+
+- Clonar el repositorio
+- Instalar dependencias: npm install
+- Correr el proyecto: npm start
+
 ### Comandos Disponibles
 - GET BOOKS: Lista todos los libros
 - ADD BOOK: Agrega un nuevo libro (título, autor, editorial)
@@ -19,7 +30,6 @@ Permite manejar libros, autores y editoriales, almacenando los datos en archivos
 - EDIT PUBLISHER: Edita una editorial existente por id
 - DELETE PUBLISHER: Elimina un editorial existente por id
 
-
 ## 🚀 Características
 
 - Gestión completa de libros (listar, agregar, editar, eliminar)
@@ -29,17 +39,6 @@ Permite manejar libros, autores y editoriales, almacenando los datos en archivos
 - Comunicación mediante servidor TCP
 - Generación automática de IDs únicos
 - Manejo de errores y validaciones
-
-## 📋 Requisitos Previos
-
--e Node.js (versión 14 o superior)
-- npm (gestor de paquetes d Node.js)
-
-## 🔧 Instalación y Uso
-
-- Clonar el repositorio
-- Instalar dependencias: npm install
-- Correr el proyecto: npm start
 
 ## ✨ Autores
 - Saucedo
