@@ -36,7 +36,7 @@ const authorController = {
         const authorIndex = authors.findIndex(author => author.id === authorId);
 
         if (authorIndex === -1) {
-            return responseView.formatError('Author Eliminado');
+            return responseView.formatError('Author no encontrado');
         }
 
         const deletedAuthor = authors.splice(authorIndex, 1)[0];

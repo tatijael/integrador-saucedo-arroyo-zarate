@@ -83,7 +83,9 @@ function handleOption(option) {
             });
             break;
         default:
-            console.log('Opción inválida');
+            console.log('\n========================================');
+            console.log('           Opción inválida');
+            console.log('========================================\n');
             showMenu();
     }
 }
@@ -212,13 +214,10 @@ client.on('data', (data) => {
                 console.log('\nListado:');
                 console.log(JSON.stringify(response.data, null, 2));
             }
-        } else if (response.message) {
-            console.log('Mensaje:', response.message);
-        }
+        } 
     }
     
     if (response.message && (response.book || response.author || response.publisher)) {
-        console.log('Mensaje:', response.message);
         const itemData = response.book || response.author || response.publisher;
         console.log(JSON.stringify(JSON.parse(itemData), null, 2));
     }
