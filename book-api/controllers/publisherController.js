@@ -35,7 +35,7 @@ const publisherController = {
         const publisherIndex = publishers.findIndex(publisher => publisher.id === publisherId);
 
         if (publisherIndex  === -1) {
-            return responseView.formatError('Author Eliminado');
+            return responseView.formatError('Editorial no encontrada');
         }
 
         const deletedPublisher = publishers.splice(publisherIndex, 1)[0];

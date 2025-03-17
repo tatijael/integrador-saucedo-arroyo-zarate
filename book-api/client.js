@@ -1,6 +1,7 @@
 
 const net = require('net')
 const readline = require("readline");
+const { exec } = require('child_process');
 const { v4: uuidv4 } = require('uuid');
 
 const rl = readline.createInterface({
@@ -69,12 +70,22 @@ function handleOption(option) {
             deletePublisher();
             break;
         case '13':
-            console.log('Adios!');
-            client.destroy();
-            rl.close();
+            console.log('Cerrando conexiones...');
+            exec('kill -9 $(lsof -ti:8080)', (error) => {
+                if (error) {
+                    // console.log('El servidor ya está detenido');
+                    return;
+                }
+                // console.log('Servidor detenido correctamente');
+                // console.log('¡Adios!');
+                // client.destroy();
+                // rl.close();
+            });
             break;
         default:
-            console.log('Opción inválida');
+            console.log('\n========================================');
+            console.log('           Opción inválida');
+            console.log('========================================\n');
             showMenu();
     }
 }
@@ -203,13 +214,10 @@ client.on('data', (data) => {
                 console.log('\nListado:');
                 console.log(JSON.stringify(response.data, null, 2));
             }
-        } else if (response.message) {
-            console.log('Mensaje:', response.message);
-        }
+        } 
     }
     
     if (response.message && (response.book || response.author || response.publisher)) {
-        console.log('Mensaje:', response.message);
         const itemData = response.book || response.author || response.publisher;
         console.log(JSON.stringify(JSON.parse(itemData), null, 2));
     }
