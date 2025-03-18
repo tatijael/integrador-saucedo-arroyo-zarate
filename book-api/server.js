@@ -226,7 +226,7 @@ const server = net.createServer((socket) => {
 
     socket.on('end', () => console.log('Cliente desconectado'));
     socket.on('error', (error) => {
-        if (error.code !== 'ECONNRESET') {
+        if (error.code == 'ECONNRESET') {
            return;
         }
 
