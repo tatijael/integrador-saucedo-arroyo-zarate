@@ -17,13 +17,21 @@ function powerOff() {
             break;
     }
 
-    exec(command, (error) => {
-        if (!error) {
-            console.log('Servidor detenido correctamente');
-        }
-        console.log('¡Adios!');
-        process.exit(0);
-    });
+    try {
+        console.log('Cerrando servidor...');
+        exec(command, (error) => {
+            if (!error) {
+                console.log('Servidor detenido correctamente');
+            }
+            setTimeout(() => {
+                console.log('¡Adios!');
+                process.exit(0);
+            }, 500);
+        });
+    } catch (error) {
+        console.log('Error al cerrar el servidor:', error);
+        process.exit(1);
+    }
 }
 
 module.exports = {
