@@ -1,7 +1,7 @@
 
 const net = require('net')
 const readline = require("readline");
-const { exec } = require('child_process');
+const { powerOff } = require('./utils');
 const { v4: uuidv4 } = require('uuid');
 
 const rl = readline.createInterface({
@@ -71,16 +71,7 @@ function handleOption(option) {
             break;
         case '13':
             console.log('Cerrando conexiones...');
-            exec('kill -9 $(lsof -ti:8080)', (error) => {
-                if (error) {
-                    // console.log('El servidor ya está detenido');
-                    return;
-                }
-                // console.log('Servidor detenido correctamente');
-                // console.log('¡Adios!');
-                // client.destroy();
-                // rl.close();
-            });
+            powerOff();
             break;
         default:
             console.log('\n========================================');
