@@ -17,6 +17,13 @@ const server = net.createServer((socket) => {
 
         switch(`${action} ${type}`) {
 
+            case 'EXIT ALL':
+                socket.end();
+                server.close(() => {
+                    console.log('Servidor cerrado');
+                    process.exit(0);
+                });
+               break;
             case 'GET BOOKS':
                 socket.write(bookController.getAllBooks());
                 break;

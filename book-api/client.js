@@ -1,7 +1,6 @@
 
 const net = require('net')
 const readline = require("readline");
-const { powerOff } = require('./utils');
 const { v4: uuidv4 } = require('uuid');
 
 const rl = readline.createInterface({
@@ -71,7 +70,10 @@ function handleOption(option) {
             break;
         case '13':
             console.log('Cerrando conexiones...');
-            powerOff();
+            client.write('EXIT ALL');
+            rl.close();
+            client.end();
+            process.exit(0);
             break;
         default:
             console.log('\n========================================');
