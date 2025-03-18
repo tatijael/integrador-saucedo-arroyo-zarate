@@ -225,7 +225,13 @@ const server = net.createServer((socket) => {
     });
 
     socket.on('end', () => console.log('Cliente desconectado'));
-    socket.on('error', (error) => console.error('Socket error:', error));
+    socket.on('error', (error) => {
+        if (error.code !== 'ECONNRESET') {
+           return;
+        }
+
+        console.error('Socket error:', error)
+    });
 });
 
 const PORT = 8080;

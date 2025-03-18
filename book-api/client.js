@@ -237,6 +237,9 @@ client.on('close', () => {
 });
 
 client.on('error', (error) => {
+    if (error.code !== 'ECONNRESET') {
+        return;
+    }
     console.error('Error de conexión:', error);
 });
 
