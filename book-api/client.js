@@ -199,32 +199,36 @@ client.on('connect', () => {
 
 client.on('data', (data) => {
     console.log("\n=== RESPUESTA SERVIDOR ===");
-    const response = JSON.parse(data.toString());
+    const responseString = data.toString();
+    let response;
 
-    if (response.status === 'success') {
-        if (response.data) {
-            if (Array.isArray(response.data)) {
-                console.log('\nListado:');
-                console.log(JSON.stringify(response.data, null, 2));
-            }
-        } else if (response.message) {
-            console.log('Mensaje:', response.message);
-        }
-    }
-
-    if (response.message && (response.book || response.author || response.publisher)) {
-        const itemData = response.book || response.author || response.publisher;
-        console.log('Mensaje:', response.message);
+    try {
+        response = JSON.parse(responseString);
         
-        try {
-            console.log(JSON.stringify(JSON.parse(itemData), null, 2));
-        } catch (error) {
-            console.log(JSON.stringify(itemData, null, 2));
+        if (response.status === 'error') {
+            console.log('❌ Error:', response.message);
+        } else if (response.status === 'success') {
+            if (response.message) {
+                console.log('✅', response.message);
+            }
+            
+            if (response.data) {
+                if (typeof response.data === 'string') {
+                    // Parse nested JSON if it's a string
+                    try {
+                        const parsedData = JSON.parse(response.data);
+                        console.log(JSON.stringify(parsedData, null, 2));
+                    } catch {
+                        console.log(JSON.stringify(response.data, null, 2));
+                    }
+                } else {
+                    console.log(JSON.stringify(response.data, null, 2));
+                }
+            }
         }
-    }
-
-    if (response.status === 'error') {
-        console.log('❌ Error:', response.message);
+    } catch (error) {
+        console.error('Error al parsear la respuesta del servidor:', error);
+        console.log('Respuesta cruda del servidor:', responseString);
     }
 
     console.log("\n============================");

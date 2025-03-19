@@ -2,6 +2,7 @@ const net = require('net');
 const bookController = require('./controllers/booksController');
 const authorController = require('./controllers/authorController');
 const publisherController = require('./controllers/publisherController');
+const formatResponse = require('./views/responseView'); // Importar formatResponse
 
 function isJSON(str) {
     return str.startsWith('{') && str.endsWith('}');
@@ -15,15 +16,15 @@ const server = net.createServer((socket) => {
         const [action, type, ...rest] = command.split(' ');
         const jsonData = rest.join(' ');
 
-        switch(`${action} ${type}`) {
-
+        switch (`${action} ${type}`) {
             case 'EXIT ALL':
                 socket.end();
                 server.close(() => {
                     console.log('Servidor cerrado');
                     process.exit(0);
                 });
-               break;
+                break;
+
             case 'GET BOOKS':
                 socket.write(bookController.getAllBooks());
                 break;
@@ -32,85 +33,58 @@ const server = net.createServer((socket) => {
                 if (isJSON(jsonData)) {
                     const bookObject = JSON.parse(jsonData);
                     const newBook = bookController.addBook(bookObject);
-                    socket.write(JSON.stringify({  message: 'Libro agregado correctamente',  book: newBook }));
+                    socket.write(formatResponse.formatNewItem(newBook, 'Libro')); // Usar formatResponse
                 } else {
-                    socket.write(JSON.stringify({ message: 'Datos de libro no válidos', status: 'error'  }));
+                    socket.write(formatResponse.formatError('Datos de libro no válidos')); // Usar formatResponse
                 }
                 break;
 
             case 'EDIT BOOK':
                 if (isJSON(jsonData)) {
-                const bookObject = JSON.parse(jsonData);
-                const updatedBook = bookController.editBook(bookObject);            
-                const response = JSON.parse(updatedBook); // Convertir el resultado en un objeto
-            
-                    if (response.status === 'error') {
-                        socket.write(JSON.stringify({ status: 'error', message: "Libro no encontrado" }));
-                    } else {
-                        socket.write(JSON.stringify({ status: 'success', message: 'Libro actualizado correctamente', book: response }));
-                    }
+                    const bookObject = JSON.parse(jsonData);
+                    const updatedBook = bookController.editBook(bookObject);
+                    socket.write(updatedBook); // Ya está formateado por el controlador
                 } else {
-                    socket.write(JSON.stringify({ status: 'error', message: 'Datos de libro no válidos' }));
+                    socket.write(formatResponse.formatError('Datos de libro no válidos')); // Usar formatResponse
                 }
-                break;              
-                
+                break;
+
             case 'DELETE BOOK':
                 const bookId = rest[0];
                 const deletedBook = bookController.deleteBook(bookId);
-            
-                // Verificar si la respuesta es un error o éxito
-                const response = JSON.parse(deletedBook); // Suponiendo que la respuesta es un string JSON
-            
-                if (response.status === 'error') {
-                    // Si hay un error (libro no encontrado)
-                    socket.write(JSON.stringify({ status: 'error', message: 'Libro no encontrado' }));
-                } else {
-                    // Si la eliminación es exitosa
-                    socket.write(JSON.stringify({ status: 'success', book: 'Libro eliminado correctamente'  })); // El libro eliminado
-                }
+                socket.write(deletedBook); // Ya está formateado por el controlador
                 break;
 
             case 'GET AUTHORS':
                 socket.write(authorController.getAllAuthors());
                 break;
-        
+
             case 'ADD AUTHOR':
                 if (isJSON(jsonData)) {
                     const authorObject = JSON.parse(jsonData);
                     const newAuthor = authorController.addAuthor(authorObject);
-                    socket.write(JSON.stringify({ message: 'Autor agregado correctamente',  author: newAuthor }));
+                    socket.write(formatResponse.formatNewItem(newAuthor, 'Autor')); // Usar formatResponse
                 } else {
-                    socket.write(JSON.stringify({  message: 'Datos de autor no válidos',  status: 'error'  }));
+                    socket.write(formatResponse.formatError('Datos de autor no válidos')); // Usar formatResponse
                 }
                 break;
 
             case 'EDIT AUTHOR':
                 if (isJSON(jsonData)) {
                     const authorObject = JSON.parse(jsonData);
-                    const updatedAuthor = JSON.parse(authorController.editAuthor(authorObject));
-
-                    if (updatedAuthor.status === 'error') {
-                        socket.write(JSON.stringify({ status: 'error', message: 'Autor no encontrado' }));
-                    } else {
-                        socket.write(JSON.stringify({ status: 'success', author: updatedAuthor }));
-                    }
+                    const updatedAuthor = authorController.editAuthor(authorObject);
+                    socket.write(updatedAuthor); // Ya está formateado por el controlador
                 } else {
-                    socket.write(JSON.stringify({ status: 'error',  message: 'El ID no corresponde a ningun Autor' }));
+                    socket.write(formatResponse.formatError('Datos de autor no válidos')); // Usar formatResponse
                 }
                 break;
-        
+
             case 'DELETE AUTHOR':
                 const authorId = rest[0];
                 const deletedAuthor = authorController.deleteAuthor(authorId);
-                const authorResponse = JSON.parse(deletedAuthor);
-                
-                if (authorResponse.status === 'error') {
-                    socket.write(JSON.stringify({ status: 'error', message: 'Autor no encontrado' }));
-                } else {
-                    socket.write(JSON.stringify({ status: 'success', message: 'Autor eliminado correctamente',  author: authorResponse.author  })); // Ejemplo: "Autor eliminado correctamente" // El autor eliminado
-                }
+                socket.write(deletedAuthor); // Ya está formateado por el controlador
                 break;
-    
+
             case 'GET PUBLISHERS':
                 socket.write(publisherController.getAllPublishers());
                 break;
@@ -119,49 +93,40 @@ const server = net.createServer((socket) => {
                 if (isJSON(jsonData)) {
                     const publisherObject = JSON.parse(jsonData);
                     const newPublisher = publisherController.addPublisher(publisherObject);
-                    socket.write(JSON.stringify({  message: 'Editorial agregada correctamente',   publisher: newPublisher  }));
+                    socket.write(formatResponse.formatNewItem(newPublisher, 'Editorial')); // Usar formatResponse
                 } else {
-                    socket.write(JSON.stringify({  message: 'Datos de editorial no válidos',  status: 'error'  }));
+                    socket.write(formatResponse.formatError('Datos de editorial no válidos')); // Usar formatResponse
                 }
-                break;  
+                break;
 
             case 'EDIT PUBLISHER':
                 if (isJSON(jsonData)) {
                     const publisherObject = JSON.parse(jsonData);
-                    const updatedPublisher = JSON.parse(publisherController.editPublisher(publisherObject));
-
-                    if (updatedPublisher.status === 'error') {
-                        socket.write(JSON.stringify({ status: 'error',  message: 'Editorial no encotrada' }));
-                    } else {
-                        socket.write(JSON.stringify({ status: 'success', message: 'Editorial actualizada correctamente', publisher: updatedPublisher }));
-                    }
+                    const updatedPublisher = publisherController.editPublisher(publisherObject);
+                    socket.write(updatedPublisher); // Ya está formateado por el controlador
                 } else {
-                    socket.write(JSON.stringify({ status: 'error', message: 'Datos de editorial no válidos' }));
+                    socket.write(formatResponse.formatError('Datos de editorial no válidos')); // Usar formatResponse
                 }
                 break;
-        
+
             case 'DELETE PUBLISHER':
                 const publisherId = rest[0];
                 const deletedPublisher = publisherController.deletePublisher(publisherId);
-                const publisherResponse = JSON.parse(deletedPublisher);
-                
-                if (publisherResponse.status === 'error') {
-                    socket.write(JSON.stringify({ status: 'error',  message: 'Editorial no encontrada' }));
-                } else {
-                    socket.write(JSON.stringify({ status: 'success', message: 'Editorial eliminada correctamente',  publisher: publisherResponse.publisher  }));
-                }
-                break;       
+                socket.write(deletedPublisher); // Ya está formateado por el controlador
+                break;
+
+            default:
+                socket.write(formatResponse.formatError('Comando no reconocido')); // Usar formatResponse
+                break;
         }
-  
     });
 
     socket.on('end', () => console.log('Cliente desconectado'));
     socket.on('error', (error) => {
         if (error.code == 'ECONNRESET') {
-           return;
+            return;
         }
-
-        console.error('Socket error:', error)
+        console.error('Socket error:', error);
     });
 });
 
