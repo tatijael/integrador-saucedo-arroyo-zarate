@@ -160,13 +160,13 @@ function addPublisher() {
         publisher.name = name;
         rl.question('Country: ', (country) => {
             publisher.country = country;
-        rl.question('Founded Year: ', (year) => {
-            publisher.foundedYear = year;
-            client.write(`ADD PUBLISHER ${JSON.stringify(publisher)}`);
-             });
+            rl.question('Founded Year: ', (year) => {
+                publisher.foundedYear = year;
+                client.write(`ADD PUBLISHER ${JSON.stringify(publisher)}`);
+            });
         });
-    }
-)};
+    });
+}
 
 function editPublisher() {
     const publisher = {};

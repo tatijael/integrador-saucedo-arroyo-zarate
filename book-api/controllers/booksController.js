@@ -43,7 +43,7 @@ const bookController = {
             };
     
             bookModel.writeBook(books);
-            return responseView.formatEditResponse(books[bookIndex], 'Libro actualizado correctamente');  // Respuesta exitosa
+            return responseView.formatEditResponse(books[bookIndex], 'Libro');  // Respuesta exitosa
         } catch (error) {
             console.error('Error al editar el libro:', error.message);
             return responseView.formatError('No se pudo editar el libro.');
