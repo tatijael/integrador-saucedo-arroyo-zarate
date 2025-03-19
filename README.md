@@ -27,6 +27,8 @@ Iniciar el servidor:
 
 - npm start
 
+## Nota: Utilizamos npm-run-all para manejar la ejecución simultánea del servidor y el cliente. Esto permite iniciar y detener ambos procesos de manera eficiente en cualquier sistema operativo.
+
 # 📌 Comandos Disponibles
 
 ## 📖 Gestión de Libros
